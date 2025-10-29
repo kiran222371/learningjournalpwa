@@ -1,0 +1,183 @@
+/* =============================
+   BASIC RESET & BASE STYLES
+============================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  font-family: system-ui, Arial, sans-serif;
+  color: #111;
+  background: #fff;
+}
+.container {
+  padding: 0 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =============================
+   HEADER & NAVIGATION
+============================= */
+.site-header {
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  z-index: 1000;
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+.logo {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.main-nav a {
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  display: inline-block;
+  color: #222;
+  transition: background 0.3s;
+}
+.main-nav a:hover {
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+.main-nav a.active {
+  font-weight: 700;
+  border-bottom: 2px solid #222;
+}
+
+/* =============================
+   HERO SECTION
+============================= */
+.hero {
+  padding: 1.5rem 0;
+}
+.hero h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* =============================
+   INTRO & PROJECTS
+============================= */
+.intro,
+.projects-preview {
+  padding: 1rem 0;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* PROJECT CARDS */
+.project-card {
+  border: 1px solid #eee;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+/* =============================
+   FOOTER
+============================= */
+.site-footer {
+  padding: 1rem 0;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* =============================
+   RESPONSIVE GRID
+============================= */
+@media (min-width: 700px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =============================
+   HAMBURGER MENU
+============================= */
+
+/* Hidden by default on desktop */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+.menu-toggle .bar {
+  height: 3px;
+  width: 100%;
+  background-color: #222;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/* When active (turn into "X") */
+.menu-toggle.active .bar:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* MOBILE NAVIGATION */
+@media (max-width: 700px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    display: none;
+    flex-direction: column;
+    background: #fafafa;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #eee;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
+}
