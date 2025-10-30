@@ -1,15 +1,11 @@
-/* =============================
-   BASIC RESET & BASE STYLES
-============================= */
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111; background:#fff; }
 .container { padding: 0 1rem; max-width: 1100px; margin: 0 auto; }
 
-/* =============================
-   HEADER & NAVIGATION
-============================= */
+
 .site-header {
-  background: #0b3d91; /* deep blue header */
+  background: #0b3d91; 
   color: #fff;
   position: relative;
   z-index: 1000;
@@ -37,27 +33,20 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
 .main-nav a:hover { background: rgba(255,255,255,0.06); border-radius: 6px; }
 .main-nav a.active { font-weight:700; border-bottom: 2px solid rgba(255,255,255,0.9); }
 
-/* =============================
-   HERO SECTION
-============================= */
 .hero { padding: 1.5rem 0; }
 .hero h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
 
-/* =============================
-   INTRO
-============================= */
+
 .intro { padding: 1rem 0; }
 
-/* =============================
-   PROJECTS: HORIZONTAL SCROLLER
-============================= */
+
 .projects-preview {
-  background: #f0f7ff; /* light bluish background for projects area */
+  background: #f0f7ff; 
   padding: 1rem 0;
 }
 .projects-preview h3 { margin-bottom: 0.75rem; padding-left: 0.25rem; }
 
-/* Horizontal scrolling container */
+
 .projects-grid {
   display: flex;
   gap: 1rem;
@@ -68,9 +57,9 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
   scroll-snap-type: x mandatory;
 }
 
-/* Card size for horizontal deck */
+
 .project-card {
-  flex: 0 0 280px;           /* fixed visual card width */
+  flex: 0 0 280px;         
   scroll-snap-align: start;
   border: 1px solid #e6eef8;
   padding: 0.75rem;
@@ -82,9 +71,6 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
 .project-card:hover { transform: translateY(-6px); }
 .project-card img { width:100%; height:auto; border-radius:8px; margin-bottom:0.5rem; }
 
-/* =============================
-   TERMS
-============================= */
 .terms {
   margin: 1.5rem auto;
   padding: 1rem 0;
@@ -93,11 +79,9 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
   font-size: 0.95rem;
 }
 
-/* =============================
-   FOOTER
-============================= */
+
 .site-footer {
-  background: #0a274f; /* slightly darker navy */
+  background: #0a274f; 
   color: #e6eef8;
   border-top: none;
   padding: 1rem 0;
@@ -105,21 +89,15 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
 }
 .site-footer p { color: #d6e6ff; font-size: 0.95rem; }
 
-/* =============================
-   BASE FOOTER & GRID RESPONSIVENESS
-============================= */
-/* keep default grid for other pages if needed (projects page will use different layout) */
+
 @media (min-width: 700px) {
-  /* no change for horizontal scroller on wider screens - it stays horizontal, but we can adjust card width */
+  
   .project-card { flex: 0 0 320px; }
 }
 @media (min-width: 1100px) {
   .container { max-width: 1200px; }
 }
 
-/* =============================
-   HAMBURGER MENU (keep previous behavior)
-============================= */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -144,7 +122,7 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
 .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
 .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
 
-/* Mobile nav dropdown (animated) */
+
 @media (max-width: 700px) {
   .menu-toggle { display: flex; color: #fff; }
 
@@ -177,4 +155,35 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
     border-bottom: 1px solid rgba(255,255,255,0.03);
     color:#fff;
   }
+}
+/* =============================
+   JOURNAL PAGE STYLES
+============================= */
+
+.journal-entry {
+  background: #f8faff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(11,61,145,0.05);
+  margin: 1rem 0 1.5rem 0;
+}
+
+.journal-entry h3 {
+  color: #0b3d91;
+  margin-bottom: 1rem;
+}
+
+.journal-question {
+  margin-bottom: 1rem;
+}
+
+.journal-question h4 {
+  color: #0a274f;
+  margin-bottom: 0.5rem;
+}
+
+.journal-question p {
+  line-height: 1.6;
+  color: #333;
+  font-size: 0.98rem;
 }
