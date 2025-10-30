@@ -1,31 +1,19 @@
 /* =============================
    BASIC RESET & BASE STYLES
 ============================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html, body {
-  height: 100%;
-  font-family: system-ui, Arial, sans-serif;
-  color: #111;
-  background: #fff;
-}
-.container {
-  padding: 0 1rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111; background:#fff; }
+.container { padding: 0 1rem; max-width: 1100px; margin: 0 auto; }
 
 /* =============================
    HEADER & NAVIGATION
 ============================= */
 .site-header {
-  background: #fafafa;
-  border-bottom: 1px solid #eee;
+  background: #0b3d91; /* deep blue header */
+  color: #fff;
   position: relative;
   z-index: 1000;
+  border-bottom: none;
 }
 .site-header .container {
   display: flex;
@@ -33,10 +21,7 @@ html, body {
   justify-content: space-between;
   padding: 0.75rem 0;
 }
-.logo {
-  font-size: 1.125rem;
-  font-weight: 600;
-}
+.logo { font-size: 1.125rem; font-weight: 600; color: #fff; }
 .main-nav {
   display: flex;
   align-items: center;
@@ -46,146 +31,95 @@ html, body {
   text-decoration: none;
   padding: 0.4rem 0.6rem;
   display: inline-block;
-  color: #222;
-  transition: background 0.3s;
+  color: #fff;
+  transition: background 0.2s, color 0.2s;
 }
-.main-nav a:hover {
-  background: #f0f0f0;
-  border-radius: 6px;
-}
-.main-nav a.active {
-  font-weight: 700;
-  border-bottom: 2px solid #222;
-}
+.main-nav a:hover { background: rgba(255,255,255,0.06); border-radius: 6px; }
+.main-nav a.active { font-weight:700; border-bottom: 2px solid rgba(255,255,255,0.9); }
 
 /* =============================
    HERO SECTION
 ============================= */
-.hero {
-  padding: 1.5rem 0;
-}
-.hero h2 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-}
+.hero { padding: 1.5rem 0; }
+.hero h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
 
 /* =============================
-   INTRO & PROJECTS
+   INTRO
 ============================= */
-.intro,
+.intro { padding: 1rem 0; }
+
+/* =============================
+   PROJECTS: HORIZONTAL SCROLLER
+============================= */
 .projects-preview {
+  background: #f0f7ff; /* light bluish background for projects area */
   padding: 1rem 0;
 }
+.projects-preview h3 { margin-bottom: 0.75rem; padding-left: 0.25rem; }
+
+/* Horizontal scrolling container */
 .projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
   gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 0.5rem 1rem 0.5rem;
+  scroll-snap-type: x mandatory;
 }
 
-/* PROJECT CARDS */
+/* Card size for horizontal deck */
 .project-card {
-  border: 1px solid #eee;
+  flex: 0 0 280px;           /* fixed visual card width */
+  scroll-snap-align: start;
+  border: 1px solid #e6eef8;
   padding: 0.75rem;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(11,61,145,0.06);
+  transition: transform 0.25s ease;
+}
+.project-card:hover { transform: translateY(-6px); }
+.project-card img { width:100%; height:auto; border-radius:8px; margin-bottom:0.5rem; }
+
+/* =============================
+   TERMS
+============================= */
+.terms {
+  margin: 1.5rem auto;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  color: #333;
+  font-size: 0.95rem;
 }
 
 /* =============================
    FOOTER
 ============================= */
 .site-footer {
+  background: #0a274f; /* slightly darker navy */
+  color: #e6eef8;
+  border-top: none;
   padding: 1rem 0;
-  text-align: center;
-  border-top: 1px solid #f0f0f0;
-  margin-top: 2rem;
-  font-size: 0.95rem;
-  color: #555;
+  margin-top: 1rem;
 }
+.site-footer p { color: #d6e6ff; font-size: 0.95rem; }
 
 /* =============================
-   RESPONSIVE GRID
+   BASE FOOTER & GRID RESPONSIVENESS
 ============================= */
+/* keep default grid for other pages if needed (projects page will use different layout) */
 @media (min-width: 700px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  /* no change for horizontal scroller on wider screens - it stays horizontal, but we can adjust card width */
+  .project-card { flex: 0 0 320px; }
 }
 @media (min-width: 1100px) {
-  .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .container { max-width: 1200px; }
 }
 
 /* =============================
-   HAMBURGER MENU
+   HAMBURGER MENU (keep previous behavior)
 ============================= */
-
-/* Hidden by default on desktop */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 22px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1001;
-}
-.menu-toggle .bar {
-  height: 3px;
-  width: 100%;
-  background-color: #222;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-/* When active (turn into "X") */
-.menu-toggle.active .bar:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
-}
-.menu-toggle.active .bar:nth-child(2) {
-  opacity: 0;
-}
-.menu-toggle.active .bar:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
-}
-
-/* MOBILE NAVIGATION */
-@media (max-width: 700px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .main-nav {
-    display: none;
-    flex-direction: column;
-    background: #fafafa;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    border-top: 1px solid #eee;
-    padding: 1rem 0;
-    text-align: center;
-  }
-
-  .main-nav a {
-    display: block;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .main-nav.active {
-    display: flex;
-  }
-}
-   /* ============================= */
-/* HAMBURGER MENU FIX & ANIMATION */
-/* ============================= */
-
-/* Ensure it's clickable */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -198,63 +132,49 @@ html, body {
   z-index: 1001;
   transition: transform 0.2s ease;
 }
-
 .menu-toggle .bar {
   height: 3px;
   width: 100%;
-  background-color: #222;
+  background-color: #fff;
   border-radius: 5px;
   transition: all 0.3s ease;
 }
+.menu-toggle.tapped { transform: scale(0.9); }
+.menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translateY(8px); }
+.menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
 
-/* Small tap feedback */
-.menu-toggle.tapped {
-  transform: scale(0.9);
-}
-
-/* Animate into X */
-.menu-toggle.active .bar:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
-}
-.menu-toggle.active .bar:nth-child(2) {
-  opacity: 0;
-}
-.menu-toggle.active .bar:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
-}
-
-/* Mobile dropdown animation */
+/* Mobile nav dropdown (animated) */
 @media (max-width: 700px) {
-  .menu-toggle {
-    display: flex;
-  }
+  .menu-toggle { display: flex; color: #fff; }
 
   .main-nav {
     display: flex;
     flex-direction: column;
-    background: #fafafa;
+    background: #0b3d91;
     position: absolute;
-    top: 60px;
+    top: 64px;
     left: 0;
     right: 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255,255,255,0.04);
     padding: 0;
     text-align: center;
     overflow: hidden;
     max-height: 0;
     opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    transition: max-height 0.32s ease, opacity 0.32s ease, padding 0.32s ease;
   }
 
   .main-nav.active {
-    padding: 1rem 0;
-    max-height: 300px;
+    padding: 0.5rem 0;
+    max-height: 360px;
     opacity: 1;
   }
 
   .main-nav a {
     display: block;
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    color:#fff;
   }
 }
