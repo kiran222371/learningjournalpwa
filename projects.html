@@ -13,6 +13,9 @@
     <div class="container">
       <h1 class="logo">Kiran Basnet</h1>
 
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
       <!-- Hamburger Button -->
       <button class="menu-toggle" aria-label="Toggle navigation">
         <span class="bar"></span>
@@ -20,13 +23,8 @@
         <span class="bar"></span>
       </button>
 
-      <!-- Navigation -->
-      <nav class="main-nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="journal.html">Journal</a>
-        <a href="projects.html" class="active">Projects</a>
-        <a href="about.html">About</a>
-      </nav>
+      <!-- Nav placeholder - JS will inject the real <nav> here -->
+      <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
     </div>
   </header>
 
@@ -37,24 +35,25 @@
       <p>Here are some of my course projects and personal works. This page will grow over time as I add more examples.</p>
     </section>
 
+    <!-- Project Cards (Clickable Links) -->
     <section class="projects-grid">
-      <article class="project-card">
+      <a href="project1.html" class="project-card">
         <img src="images/project1.jpg" alt="Project 1 screenshot" style="max-width:100%; border-radius:8px;">
         <h3>Project 1: HTML & CSS Layout</h3>
         <p>A simple website created using semantic HTML and responsive CSS. Focused on mobile-first design principles.</p>
-      </article>
+      </a>
 
-      <article class="project-card">
+      <a href="project2.html" class="project-card">
         <img src="images/project2.jpg" alt="Project 2 screenshot" style="max-width:100%; border-radius:8px;">
         <h3>Project 2: JavaScript Interaction</h3>
-        <p>This project will introduce interactivity using JavaScript to enhance user experience.</p>
-      </article>
+        <p>This project introduces interactivity using JavaScript to enhance user experience.</p>
+      </a>
 
-      <article class="project-card">
+      <a href="project3.html" class="project-card">
         <img src="images/project3.jpg" alt="Project 3 screenshot" style="max-width:100%; border-radius:8px;">
         <h3>Project 3: Progressive Web App</h3>
         <p>Later in the module, I will turn this Learning Journal into a full PWA with offline functionality.</p>
-      </article>
+      </a>
     </section>
   </main>
 

@@ -187,3 +187,100 @@ html, body { height: 100%; font-family: system-ui, Arial, sans-serif; color:#111
   color: #333;
   font-size: 0.98rem;
 }
+
+/* =============================
+   THEME SWITCHER STYLES
+============================= */
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #222;
+  transition: transform 0.2s ease;
+  margin-right: 10px;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.2);
+}
+
+/* Dark Mode Theme */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode .site-header {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+body.dark-mode .site-footer {
+  background: #1e1e1e;
+  color: #bbb;
+}
+
+body.dark-mode .project-card {
+  background: #1b1b1b;
+  border-color: #333;
+  box-shadow: 0 1px 3px rgba(255,255,255,0.1);
+}
+
+body.dark-mode a {
+  color: #90caf9;
+}
+
+body.dark-mode .datetime {
+  color: #90caf9;
+}
+/* Clickable Project Cards */
+.project-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--card-bg, #fff);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.project-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.project-card h3 {
+  margin-top: 0.75rem;
+  font-size: 1.1rem;
+  color: var(--text-color, #111);
+}
+/* Hover effect for project previews */
+.projects-preview .project-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--card-bg, #fff);
+}
+
+.projects-preview .project-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.projects-preview .project-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
