@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <a href="journal.html">Journal</a>
     <a href="projects.html">Projects</a>
     <a href="about.html">About</a>
+    
   `;
 
   const navPlaceholder = document.getElementById("nav-placeholder");
