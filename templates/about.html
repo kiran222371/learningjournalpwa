@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning Journal — About Me</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Kiran Basnet</h1>
+
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <!-- Hamburger Button -->
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Navigation placeholder (JS injects links here) -->
+      <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section class="hero">
+      <h2>About Me</h2>
+      <p>Hi! I’m Kiran Basnet — a student learning Mobile Application Development and building my skills in front-end web design.</p>
+    </section>
+
+    <section class="about-details">
+      <h3>Background</h3>
+      <p>
+        I’m passionate about creating clean, user-friendly digital experiences.
+        This Learning Journal tracks my weekly progress and showcases projects I develop throughout the module.
+      </p>
+    </section>
+
+    <section class="skills">
+      <h3>Technical Skills</h3>
+      <ul>
+        <li>HTML5 / CSS3 (Responsive Design, Flexbox, Grid)</li>
+        <li>JavaScript (Basics, DOM Manipulation, APIs)</li>
+        <li>Version Control with Git and GitHub</li>
+        <li>UI Design and Accessibility Principles</li>
+      </ul>
+    </section>
+
+    <!-- Third-Party API: Google Maps Embed -->
+    <section class="location">
+  <h3>Where I Study</h3>
+  <p>This map shows a general location related to my study and development work.</p>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2499.199939614577!2d-0.8067141077442791!3d51.21539235474708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48742dad1cfba769%3A0x78f847b79c623abe!2sUniversity%20for%20the%20Creative%20Arts!5e0!3m2!1sen!2suk!4v1764066450290!5m2!1sen!2suk"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+
+    <section class="contact">
+      <h3>Contact Me</h3>
+      <p>If you’d like to connect, reach out via:</p>
+      <ul>
+        <li>Email: <a href="mailto:kb916980@gmail.com">kb916980@gmail.com</a></li>
+        <li>GitHub: <a href="https://github.com/kiran222371" target="_blank">github.com/kiran222371</a></li>
+        <li>LinkedIn: <a href="#" target="_blank">linkedin.com/in/kiranbasnet</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Kiran Basnet — Learning Journal</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

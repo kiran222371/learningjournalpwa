@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Learning Journal — Home</title>
+
+  <!-- PWA: Manifest + theme color -->
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Kiran Basnet</h1>
+
+      <!-- Theme Toggle Button (standard id used across app) -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <!-- Hamburger Button -->
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Nav placeholder - JS injects navigation links -->
+      <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>Welcome to my Learning Journal</h2>
+      <p>
+        This site documents my weekly learning, showcases projects, and presents my profile
+        for the Mobile Application Development course.
+      </p>
+
+      <!-- Live Date/Time Placeholder -->
+      <p id="liveDateTime" class="datetime"></p>
+    </section>
+
+    <!-- Introduction -->
+    <section class="intro">
+      <h3>What this site is for</h3>
+      <p>
+        Each week I’ll add a journal entry with reflections, record progress on projects,
+        and gradually turn this into a Progressive Web App (PWA).
+      </p>
+    </section>
+
+    <!-- Projects preview -->
+    <section class="projects-preview" aria-labelledby="projects-heading">
+      <div class="container">
+        <h3 id="projects-heading">Projects (preview)</h3>
+
+        <div class="projects-grid">
+          <!-- Weekly reflections shortcut -->
+          <a href="/journal?week=1" class="project-card">
+            <h3>Week 1: Setup & Deployment</h3>
+            <p>GitHub setup, VS Code workflow, first PWA build, and deployment.</p>
+          </a>
+
+          <a href="/journal?week=4" class="project-card">
+            <h3>Week 4: APIs</h3>
+            <p>LocalStorage, Clipboard/Notifications, and third-party quote API.</p>
+          </a>
+
+          <a href="/tracker" class="project-card">
+            <h3>Mini Project: Habit Tracker</h3>
+            <p>Offline habit tracking with streaks and a 7-day Canvas dashboard.</p>
+          </a>
+        </div>
+
+        <p style="margin-top: 0.75rem;">
+          <a href="/projects" class="btn">View all weeks & projects</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Terms section -->
+    <section class="terms container" aria-labelledby="terms-heading">
+      <h3 id="terms-heading">Terms &amp; Conditions</h3>
+      <p>
+        This Learning Journal is for educational purposes only. All project work and reflections are original.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Kiran Basnet — Learning Journal</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+
+  <!-- PWA: Service Worker Registration -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
+        try {
+          await navigator.serviceWorker.register("/static/js/sw.js");
+          console.log("✅ Service Worker registered");
+        } catch (err) {
+          console.log("❌ Service Worker registration failed:", err);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

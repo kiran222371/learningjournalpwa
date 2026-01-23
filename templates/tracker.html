@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Tracker</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+ <header class="site-header">
+  <div class="container">
+    <div class="logo">Learning Journal</div>
+
+    <button class="menu-toggle" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav id="nav" class="main-nav"></nav>
+
+    <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">🌙</button>
+  </div>
+</header>
+
+
+
+
+  </header>
+
+<main class="container">
+  <h1 style="text-align:center; margin: 1rem 0;">Habit Tracker</h1>
+  <!-- keep the rest of your tracker content below -->
+
+    <section class="card">
+      <h2>Today</h2>
+      <p id="todayLabel"></p>
+
+      <form id="habitForm" class="row">
+        <input id="habitInput" type="text" placeholder="Add a habit (e.g., 30 min coding)" required />
+        <button type="submit">Add</button>
+      </form>
+
+      <div id="habitList" class="list"></div>
+
+      <div class="row" style="margin-top: 12px;">
+        <button id="clearTodayBtn" type="button">Clear today’s checkmarks</button>
+        <button id="resetAllBtn" type="button">Reset all habits</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>7-Day Progress</h2>
+      <p><span id="summaryText"></span></p>
+      <canvas id="weekChart" width="900" height="280" style="max-width: 100%;"></canvas>
+      <p style="opacity: 0.85; font-size: 0.95rem;">
+        Chart shows % of habits completed each day (last 7 days).
+      </p>
+    </section>
+
+    <section class="card">
+  <h2>How it connects to the Learning Journal</h2>
+  <p>
+    The habit tracker supports consistent learning behaviours such as coding practice,
+    reading, and reflection, which directly improves the quality and regularity of
+    learning journal entries.
+  </p>
+</section>
+
+
+
+  </main>
+
+  <script src="/static/js/script.js"></script>
+  <script src="/static/js/tracker.js"></script>
+</body>
+</html>

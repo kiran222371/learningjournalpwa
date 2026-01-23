@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning Journal — Projects</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Kiran Basnet</h1>
+
+      <!-- Theme Toggle Button -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <!-- Hamburger Button -->
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Nav placeholder - JS will inject the real links here -->
+      <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="container">
+    <section class="hero">
+      <h2>My Projects</h2>
+      <p>
+        Here are my weekly lab reflections and the mini-project extension. Click a card to open the matching reflection
+        inside the Journal page.
+      </p>
+    </section>
+
+    <!-- Weekly Projects (click opens Journal to that week) -->
+    <section class="projects-grid" aria-label="Weekly projects">
+      <a class="project-card" href="/journal?week=1">
+        <h3>Week 1: Setup & Deployment</h3>
+        <p>GitHub repository setup, VS Code workflow, first PWA build, and deployment.</p>
+      </a>
+
+      <a class="project-card" href="/journal?week=2">
+        <h3>Week 2: Mobile-First Design</h3>
+        <p>Responsive layout planning, Flexbox use, and scaling the design across devices.</p>
+      </a>
+
+      <a class="project-card" href="/journal?week=3">
+        <h3>Week 3: JavaScript & DOM</h3>
+        <p>DOM selection, event handling, reusable navigation, and debugging using DevTools.</p>
+      </a>
+
+      <a class="project-card" href="/journal?week=4">
+        <h3>Week 4: APIs</h3>
+        <p>LocalStorage, Clipboard/Notifications, and a third-party quote API integration.</p>
+      </a>
+
+      <a class="project-card" href="/journal?week=5">
+        <h3>Week 5: Python + JSON</h3>
+        <p>Using Python to manage reflections in JSON and rendering them in the frontend.</p>
+      </a>
+
+      <a class="project-card" href="/journal?week=6">
+        <h3>Week 6: Flask Backend</h3>
+        <p>GET/POST/DELETE routes, persistence, and fixing deployment issues on PythonAnywhere.</p>
+      </a>
+
+      <a class="project-card" href="/journal?week=7">
+        <h3>Week 7: PWA Features</h3>
+        <p>Manifest + service worker caching, offline access, and installability improvements.</p>
+      </a>
+
+      <a class="project-card" href="/tracker">
+        <h3>Mini Project: Habit Tracker</h3>
+        <p>Offline habit tracking with streaks and a 7-day Canvas progress dashboard.</p>
+      </a>
+    </section>
+
+    <!-- Optional: small note -->
+    <section class="terms container" aria-labelledby="projects-note">
+      <h3 id="projects-note">Note</h3>
+      <p>
+        Each week card opens the Journal page with the selected reflection automatically displayed.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Kiran Basnet — Learning Journal</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+</body>
+</html>

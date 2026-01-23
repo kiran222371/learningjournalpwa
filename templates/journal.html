@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning Journal — Weekly Reflections</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Kiran Basnet</h1>
+
+      <!-- Theme Toggle Button -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <!-- Hamburger Button -->
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Nav placeholder (JS injects links) -->
+      <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+    <section class="hero">
+      <h2>Weekly Learning Journal</h2>
+      <p>Each week I reflect on what I’ve learned and how I’ve improved my web development skills.</p>
+    </section>
+
+    <!-- Week Selector -->
+    <section class="journal-entry" id="week-selector">
+      <h3>Select Week</h3>
+      <div class="week-buttons" role="tablist" aria-label="Weekly reflections">
+        <button class="week-btn active" type="button" data-week="1">Week 1</button>
+        <button class="week-btn" type="button" data-week="2">Week 2</button>
+        <button class="week-btn" type="button" data-week="3">Week 3</button>
+        <button class="week-btn" type="button" data-week="4">Week 4</button>
+        <button class="week-btn" type="button" data-week="5">Week 5</button>
+        <button class="week-btn" type="button" data-week="6">Week 6</button>
+        <button class="week-btn" type="button" data-week="7">Week 7</button>
+      </div>
+      <p class="helper-text">Tap a week to view its reflection.</p>
+    </section>
+
+    <!-- =========================
+         WEEK 1
+    ========================== -->
+    <section class="journal-entry week-content" data-week="1">
+      <h3>Week 1 Reflection</h3>
+
+      <article class="journal-question">
+        <p>
+          When I started this lab, my main goal was to understand how different platforms and tools connect in mobile and web app development.
+          Each step introduced me to something new — from version control to deployment and finally mobile app creation.
+        </p>
+        <p>
+          The first thing I did was set up my GitHub repository called “TemperatureConverterPWA”, and made the repository public so that my
+          project could be shared and deployed later, and added a README file.
+        </p>
+        <p>
+          After creating my GitHub account, I cloned my repository using the command in the terminal.
+          Next, I opened the project in Visual Studio Code. I installed Git and the GitHub extension so I could handle commits and pushes directly
+          from VS Code. Using the terminal, I cloned my repository and started working on the project files.
+        </p>
+        <p>
+          Creating the Progressive Web App (PWA) was actually my favorite part. I designed the layout using HTML, added styling with CSS, and wrote
+          JavaScript to convert temperatures between Celsius, Fahrenheit, and Kelvin. Then I added a manifest file to make the app installable and a
+          service worker to enable offline functionality.
+        </p>
+        <p>
+          I deployed the GitHub page by selecting deploy from a branch to main and then to the root directory, and I saved it. After saving, GitHub
+          generated a live URL for the app by itself.
+        </p>
+        <p>
+          After finishing the PWA, I deployed the same project on PythonAnywhere. At first, I made a mistake by putting the wrong directory path,
+          which gave me a blank page. After correcting it, the app displayed perfectly. This step helped me understand how hosting works and how
+          important correct file mapping is on cloud platforms.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>Challenges</h4>
+        <p>
+          Throughout the process, I faced several challenges — from Git synchronization issues to directory path errors and debugging JavaScript functions.
+          However, every issue helped me learn something new about coding environments, deployment configurations, and mobile development tools.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>Conclusion</h4>
+        <p>
+          This lab gave me practical experience in creating and deploying a cross-platform application using multiple technologies. By the end, I had not only
+          built a working Temperature Converter App but also learned how to publish it online, run it on PythonAnywhere, and even test it on Android Studio.
+          It was a complete learning experience that connected theory with hands-on practice and gave me the confidence to build and deploy my own apps in the future.
+        </p>
+      </article>
+    </section>
+
+    <!-- =========================
+         WEEK 2
+    ========================== -->
+    <section class="journal-entry week-content" data-week="2">
+      <h3>Week 2 Reflection</h3>
+
+      <article class="journal-question">
+        <h4>1️⃣ How did you approach mobile-first design?</h4>
+        <p>
+          My first step was to plan for smaller screens rather than starting with the desktop layout.
+          I created the base structure in HTML and wrote CSS that worked well on a mobile display without any media queries.
+          After confirming everything looked balanced and readable, I gradually added breakpoints for tablets and laptops.
+          Each new rule was added only when the design required extra space or a layout adjustment.
+          This way, the site adapted naturally and stayed clean on every screen size.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>2️⃣ What was the most useful HTML or CSS concept you applied this week?</h4>
+        <p>
+          The concepts I found most valuable were <strong>Flexbox</strong> for alignment and <strong>responsive units</strong> such as
+          <code>rem</code> and <code>%</code>. Flexbox helped organize the header and navigation, while flexible sizing made
+          the sections scale smoothly. I also learned how helpful it is to separate content structure from presentation —
+          keeping the HTML semantic and letting CSS handle all the visual styling. This improved the site’s accessibility and maintainability.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>3️⃣ What part of HTML or CSS did you find most challenging or confusing?</h4>
+        <p>
+          I initially struggled with combining multiple media queries and understanding which rules took priority.
+          When testing different screen widths, some styles didn’t behave as expected.
+          I resolved this by experimenting step-by-step in the browser dev tools, checking which selectors were active at each size.
+          Through that trial and error, I gained a clearer sense of how cascading and inheritance work in responsive design.
+        </p>
+      </article>
+    </section>
+
+    <!-- =========================
+         WEEK 3
+    ========================== -->
+    <section class="journal-entry week-content" data-week="3">
+      <h3>Week 3 Reflection — JavaScript &amp; DOM Manipulation</h3>
+
+      <article class="journal-question">
+        <h4>1. Which DOM selection methods did you use, and why did you choose them?</h4>
+        <p>
+          In this week’s work, I used both <code>getElementById()</code> and <code>querySelector()</code> to interact with elements on my website.
+          I used <code>getElementById()</code> for specific elements such as the live date/time display and the theme toggle button because it is simple,
+          direct, and efficient when targeting single elements. I used <code>querySelector()</code> for classes and multiple elements like the navigation links
+          and hamburger menu, as it allowed me to select elements flexibly and manage them through JavaScript. Using both methods together made my code cleaner
+          and easier to understand.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>2. What was the most challenging part about linking JavaScript with your HTML?</h4>
+        <p>
+          The most challenging part was ensuring that all the JavaScript features worked consistently across every page of my Learning Journal.
+          At first, my navigation and theme switcher worked only on the homepage because some pages didn’t include the same HTML elements.
+          I solved this by creating a reusable JavaScript navigation menu so that all pages shared the same structure. Once the header was consistent across pages,
+          my JavaScript functions worked everywhere without needing to repeat code.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>3. How did you test and debug your JavaScript code?</h4>
+        <p>
+          I tested my code step-by-step using the browser console and developer tools. Whenever something didn’t behave as expected, I used
+          <code>console.log()</code> to check variable values and verify that event listeners were running correctly. I also inspected the DOM structure in
+          Chrome DevTools to make sure that JavaScript was selecting the right elements. By testing regularly after every small change, I was able to identify
+          issues quickly and confirm that all features — including the live date/time and theme switcher — were functioning smoothly on all pages.
+        </p>
+      </article>
+    </section>
+
+    <!-- =========================
+         WEEK 4
+    ========================== -->
+    <section class="journal-entry week-content" data-week="4">
+      <h3>Week 4 Reflection — Introduction to APIs</h3>
+
+      <article class="journal-question">
+        <h4>1. Which Storage, Browser, and Third-Party APIs did you choose, and why?</h4>
+        <p>
+          For the Storage API, I used LocalStorage to save and retrieve journal entries. I chose LocalStorage because it is simple to implement and allows data
+          to persist even after the browser is closed or refreshed, which is ideal for a learning journal application.
+        </p>
+        <p>
+          For the Browser API, I used the Clipboard API and the Notifications API. The Clipboard API allows users to easily copy saved journal entries, improving usability.
+          The Notifications API provides immediate feedback when an entry is successfully saved, which enhances the user experience.
+        </p>
+        <p>
+          For the Third-Party API, I integrated a public quote API to display a “Daily Inspiration” section. This was chosen to demonstrate how external data can be fetched
+          and displayed dynamically, making the journal more engaging and interactive.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>2. How did you integrate each API with DOM manipulation?</h4>
+        <p>
+          The Storage API was integrated by capturing form input values and saving them to LocalStorage as JavaScript objects. These stored entries are retrieved on page load
+          and dynamically inserted into the DOM using JavaScript, allowing saved entries to be displayed without hard-coding content.
+        </p>
+        <p>
+          The Browser APIs interact with the DOM through event listeners. When a user clicks the “Copy” button, the Clipboard API copies the relevant text from the DOM.
+          When an entry is saved, a custom event triggers the Notifications API to display a confirmation message.
+        </p>
+        <p>
+          The Third-Party API uses the <code>fetch()</code> method to retrieve quote data asynchronously. The response is processed and inserted into the DOM so that the quote
+          updates dynamically when the page loads or when the user clicks the “New Quote” button.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>3. What challenges did you encounter, and how did you solve them?</h4>
+        <p>
+          One challenge I encountered was that the original quote API failed to load due to an HTTPS certificate error, which caused the browser to block the request.
+          I identified this issue using the browser developer console. To solve this, I switched to a more reliable API and implemented a fallback system that displays local quotes
+          if the external service fails.
+        </p>
+        <p>
+          Another challenge was resolving Git merge conflicts when pushing changes to GitHub. I resolved this by using the VS Code merge editor, carefully selecting the correct
+          versions of files and committing the resolved changes. This helped me better understand version control workflows.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>4. In what ways do these APIs improve your Learning Journal PWA?</h4>
+        <p>
+          These APIs significantly improve the functionality and usability of the Learning Journal PWA. LocalStorage ensures that journal entries are persistent and reliable.
+          Browser APIs improve interactivity by providing quick actions such as copying text and receiving notifications. The Third-Party API adds dynamic external content, making the
+          application more engaging.
+        </p>
+        <p>
+          Overall, the use of APIs transforms the journal from a static webpage into a more interactive and robust progressive web application that better supports reflective learning.
+        </p>
+      </article>
+    </section>
+
+    <!-- =========================
+         WEEK 5
+    ========================== -->
+    <section class="journal-entry week-content" data-week="5">
+      <h3>Week 5 Reflection</h3>
+
+      <article class="journal-question">
+        <h4>1. What did you learn about using Python with web projects this week?</h4>
+        <p>
+          This lab helped me understand how Python can be used as a simple backend tool to manage data for a web project. I learned how to read from and write to a JSON file using Python,
+          and how that file can act as a bridge between backend logic and frontend JavaScript. This showed me a practical way to store data outside the browser while still keeping the project lightweight.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>2. How did JavaScript and Python work together in your solution?</h4>
+        <p>
+          Python was responsible for collecting user input and saving reflections to a JSON file, while JavaScript used the Fetch API to read that JSON file and display the data dynamically on the webpage.
+          Although Python and JavaScript did not communicate directly, the shared JSON file allowed them to work together effectively by separating data storage from presentation.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>3. What challenges did you face, and how did you solve them?</h4>
+        <p>
+          One challenge was understanding why the Python script worked locally but not on GitHub Pages. I learned that GitHub Pages only serves static files and cannot execute Python code.
+          I solved this by running the Python script locally to update the JSON file and then committing the updated file to GitHub so it could be displayed. I also had to carefully manage file paths
+          to ensure the JSON file could be fetched correctly.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>4. What additional feature did you implement and why?</h4>
+        <p>
+          I added a reflection counter that displays the total number of reflections stored in the JSON file. This feature uses the same fetched data and provides useful feedback to the user while also
+          demonstrating additional interaction with the JSON data, satisfying the lab’s extension requirement.
+        </p>
+      </article>
+    </section>
+
+    <!-- =========================
+         WEEK 6
+    ========================== -->
+    <section class="journal-entry week-content" data-week="6">
+      <h3>Week 6 Reflection — Flask Backend Integration</h3>
+
+      <article class="journal-question">
+        <h4>1. Why is the frontend–backend connection important?</h4>
+        <p>
+          The frontend–backend connection is important because it allows the user interface to communicate with the server where data is stored and processed.
+          The frontend handles user interaction and presentation, while the backend manages data storage, validation, and logic. By connecting the frontend to the backend using Fetch API, the application becomes dynamic and persistent,
+          allowing user input to be saved and retrieved even after refreshing the page.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>2. Which HTTP methods did you use in Flask, and why?</h4>
+        <p>
+          I used the GET, POST, and DELETE HTTP methods in Flask. The GET method was used to retrieve all reflections from the server.
+          The POST method was used to submit new reflections from the frontend to the backend and save them in a JSON file.
+          The DELETE method was added as an extra feature to remove reflections from the server. Each method was chosen because it follows RESTful conventions and clearly represents the action being performed.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>3. What is the difference between using Flask to store and load JSON data and reading JSON directly in the browser?</h4>
+        <p>
+          Reading JSON directly in the browser only works for static data and does not allow secure or persistent updates. Using Flask to store and load JSON data allows the server to control how data is saved, validated, and accessed.
+          Flask also enables multiple users to interact with the same data source and ensures that changes persist across sessions. This approach is more scalable and realistic for real-world applications.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>4. Did you face any difficulties when running your project on PythonAnywhere? How did you handle them?</h4>
+        <p>
+          Yes, I faced several difficulties when running the project on PythonAnywhere, including routing errors, file path issues, and pages returning “Not Found” errors.
+          I resolved these issues by creating proper Flask routes for each HTML page, organizing files into templates and static folders, and reloading the web app after each change.
+          I also used error logs on PythonAnywhere to identify and fix backend issues.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>5. What extra feature did you build into your PWA with Flask, and why did you add it?</h4>
+        <p>
+          I added a feature that allows users to delete reflections using a DELETE request handled by Flask. This feature improves usability by allowing users to manage their entries instead of only adding new ones.
+          It also demonstrates a deeper understanding of RESTful APIs and backend interaction beyond the minimum requirements.
+        </p>
+      </article>
+    </section>
+
+    <!-- =========================
+         WEEK 7
+    ========================== -->
+    <section class="journal-entry week-content" data-week="7">
+      <h3>Week 7 Reflection — Progressive Web App (PWA)</h3>
+
+      <article class="journal-question">
+        <h4>1. Why is it useful to enhance your Flask app with PWA features?</h4>
+        <p>
+          Enhancing my Flask app with Progressive Web App (PWA) features makes the application more reliable, accessible, and user-friendly.
+          By adding PWA capabilities, the web app behaves more like a native application, allowing users to install it on their device and access it without relying entirely on a browser.
+          This improves the overall user experience, especially on mobile devices. PWA features also improve performance and usability by enabling offline access and faster loading times, which is particularly useful when network connectivity is unstable.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>2. What did you use to support offline access and dynamic data?</h4>
+        <p>
+          To support offline access, I used a service worker along with the Cache Storage API. The service worker intercepts network requests and serves cached files when the user is offline,
+          ensuring that the core pages and assets remain accessible. For dynamic data, I used the Fetch API to retrieve reflections from the Flask backend in JSON format.
+          When the app is online, fresh data is fetched from the server and stored in the cache so that previously loaded content can still be viewed when offline.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>3. What extra feature did you add, and why?</h4>
+        <p>
+          As an extra feature, I added the ability to delete reflections from the journal. This feature improves usability by allowing users to manage their entries more effectively instead of being limited to adding content only.
+          It also demonstrates interaction between the frontend and backend using HTTP methods beyond GET and POST, making the application more complete and practical.
+        </p>
+      </article>
+
+      <article class="journal-question">
+        <h4>4. Did you face any challenges deploying your PWA, and how did you solve them?</h4>
+        <p>
+          One of the main challenges I faced was configuring the service worker and ensuring that files were cached correctly without serving outdated content.
+          This was resolved by clearing the browser cache and reloading the service worker through developer tools.
+          Another issue involved missing PWA icons and file permission errors during deployment on PythonAnywhere.
+          I solved this by correctly uploading the icon files to the static directory instead of trying to edit them.
+          Testing the app using browser developer tools helped identify and fix these issues efficiently.
+        </p>
+      </article>
+    </section>
+
+    <!-- ✅ Lab 5: Reflections from backend/reflections.json -->
+    <section class="journal-entry" id="reflections-section">
+      <h2>Reflections (<span id="reflectionCount">0</span>)</h2>
+      <div id="reflectionsList">Loading reflections...</div>
+    </section>
+
+    <!-- ✅ Week 4: Third-Party API (Daily Quote) -->
+    <section class="journal-entry" id="daily-quote">
+      <h3>Daily Inspiration</h3>
+      <p id="quoteText" aria-live="polite">Loading quote...</p>
+      <button id="newQuoteBtn" type="button" class="btn">New Quote</button>
+    </section>
+
+    <!-- Week 4: Journal Entry Form (Storage API) -->
+    <section class="journal-entry" id="add-entry">
+      <h3>Add a New Journal Entry</h3>
+
+      <form id="journalForm" class="journal-form" autocomplete="off">
+        <label for="entryTitle">Title</label>
+        <input type="text" id="entryTitle" name="entryTitle" placeholder="e.g., Week 4 – APIs" required />
+
+        <label for="entryText">Reflection</label>
+        <textarea id="entryText" name="entryText" rows="5" placeholder="Write your reflection..." required></textarea>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Save Entry</button>
+          <button type="button" id="clearAll" class="btn danger">Clear All</button>
+        </div>
+      </form>
+
+      <p class="helper-text">
+        Tip: After saving, click <strong>Copy</strong> on a saved entry to copy it to your clipboard.
+      </p>
+    </section>
+
+    <!-- Stored Entries render here -->
+    <section class="journal-entry" id="saved-entries">
+      <h3>Saved Entries</h3>
+      <div id="journalList" class="entry-list" aria-live="polite"></div>
+    </section>
+
+    <!-- Terms -->
+    <section class="terms container" aria-labelledby="terms-heading">
+      <h3 id="terms-heading">Terms &amp; Conditions</h3>
+      <p>This reflection is part of academic coursework and is intended for educational purposes only.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Kiran Basnet — Learning Journal</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/browser.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/thirdparty.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/reflections.js') }}"></script>
+
+  <!-- Week tabs logic -->
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".week-btn");
+    const weeks = document.querySelectorAll(".week-content");
+
+    function showWeek(weekNum) {
+      weeks.forEach((sec) => {
+        sec.style.display = sec.dataset.week === weekNum ? "block" : "none";
+      });
+
+      buttons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.week === weekNum);
+      });
+
+      // remember selection
+      localStorage.setItem("selectedWeek", weekNum);
+    }
+
+    // Click handlers
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        showWeek(btn.dataset.week);
+
+        // Update URL without reloading
+        const url = new URL(window.location.href);
+        url.searchParams.set("week", btn.dataset.week);
+        window.history.replaceState({}, "", url);
+      });
+    });
+
+    // 1) URL param has priority: /journal?week=3
+    const url = new URL(window.location.href);
+    const weekFromUrl = url.searchParams.get("week");
+
+    // 2) otherwise localStorage
+    const saved = localStorage.getItem("selectedWeek");
+
+    // 3) fallback Week 1
+    const initial = weekFromUrl || saved || "1";
+
+    showWeek(initial);
+  });
+</script>
+
+
+  <!-- Week button styling (small + safe) -->
+  <style>
+    .week-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .week-btn {
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid #dcdcdc;
+      background: #fff;
+      cursor: pointer;
+      font: inherit;
+    }
+    .week-btn.active {
+      background: #0b3d91;
+      color: #fff;
+      border-color: #0b3d91;
+      font-weight: 700;
+    }
+  </style>
+</body>
+</html>
