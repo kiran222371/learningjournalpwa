@@ -1,14 +1,14 @@
-// static/js/script.js
+// script.js (GitHub Pages / static)
 document.addEventListener("DOMContentLoaded", () => {
   /* -------------------------
-     1) Reusable navigation HTML
+     1) Reusable navigation HTML (GitHub Pages)
      --------------------------*/
   const navHTML = `
-    <a href="/">Home</a>
-    <a href="/journal">Journal</a>
-    <a href="/projects">Projects</a>
-    <a href="/tracker">Tracker</a>
-    <a href="/about">About</a>
+    <a href="./index.html">Home</a>
+    <a href="./journal.html">Journal</a>
+    <a href="./projects.html">Projects</a>
+    <a href="./tracker.html">Tracker</a>
+    <a href="./about.html">About</a>
   `;
 
   // Support both IDs: #nav (new) and #nav-placeholder (older pages)
@@ -20,26 +20,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* -------------------------
-     2) Mark active link based on current path
-     Works with routes like "/", "/journal", "/tracker"
+     2) Mark active link based on current page (GitHub Pages)
      --------------------------*/
   try {
     if (navEl) {
       const links = navEl.querySelectorAll("a");
-      const currentPath = window.location.pathname; // e.g. "/tracker"
+
+      // e.g. "/learningjournalpwa/journal.html"
+      const currentFile = (window.location.pathname.split("/").pop() || "").toLowerCase();
+
+      // Normalize: treat "" as index.html
+      const currentPage = currentFile === "" ? "index.html" : currentFile;
 
       links.forEach((link) => {
-        const href = link.getAttribute("href"); // e.g. "/tracker"
-        // active when exact match, also treat "/" specially
-        const isActive =
-          (href === "/" && currentPath === "/") ||
-          (href !== "/" && currentPath.startsWith(href));
+        const href = (link.getAttribute("href") || "").toLowerCase();
+        const hrefFile = href.split("/").pop(); // "journal.html"
+
+        const isActive = hrefFile === currentPage;
 
         if (isActive) link.classList.add("active");
         else link.classList.remove("active");
       });
     }
-  } catch (e) {
+  } catch {
     // fail silently
   }
 

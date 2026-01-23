@@ -1,28 +1,56 @@
-const CACHE_NAME = "learning-journal-v2";
+// sw.js (GitHub Pages / static)
+const CACHE_NAME = "learning-journal-githubpages-v1";
 
+
+const BASE_PATH = "/learningjournalpwa";
+
+// Cache only static files that actually exist in your repo root
 const STATIC_ASSETS = [
-  "/",                      // homepage route
-  "/journal",
-  "/about",
-  "/projects",
-  "/tracker",
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/about.html`,
+  `${BASE_PATH}/projects.html`,
+  `${BASE_PATH}/journal.html`,
+  `${BASE_PATH}/tracker.html`,
+  `${BASE_PATH}/project1.html`,
+  `${BASE_PATH}/project2.html`,
+  `${BASE_PATH}/project3.html`,
+  `${BASE_PATH}/project4.html`,
 
-  "/static/css/style.css",
-  "/static/js/script.js",
-  "/static/js/reflections.js",
-  "/static/js/tracker.js",
-  "/static/manifest.json",
+  `${BASE_PATH}/style.css`,
+  `${BASE_PATH}/script.js`,
+  `${BASE_PATH}/storage.js`,
+  `${BASE_PATH}/browser.js`,
+  `${BASE_PATH}/reflections.js`,
+  `${BASE_PATH}/thirdparty.js`,
+  `${BASE_PATH}/tracker.js`,
 
-  // App icons (PWA)
-  "/static/images/icon-192.png",
-  "/static/images/icon-512.png"
+  `${BASE_PATH}/manifest.json`,
+  `${BASE_PATH}/icon-192.png`,
+  `${BASE_PATH}/icon-512.png`,
+
+  // data file (static)
+  `${BASE_PATH}/reflections.json`,
 ];
 
 // Install: pre-cache core files
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // cache.addAll fails if ANY file 404s, so we add safely one-by-one
+      await Promise.all(
+        STATIC_ASSETS.map(async (url) => {
+          try {
+            const res = await fetch(url, { cache: "no-store" });
+            if (res.ok) await cache.put(url, res);
+          } catch {
+            // ignore missing files
+          }
+        })
+      );
+    })
   );
+
   self.skipWaiting();
 });
 
@@ -30,53 +58,46 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(
-        keys.map((key) =>
-          key !== CACHE_NAME ? caches.delete(key) : null
-        )
-      )
+      Promise.all(keys.map((key) => (key !== CACHE_NAME ? caches.delete(key) : null)))
     )
   );
   self.clients.claim();
 });
 
-// Fetch strategy:
-// - API (/reflections): network-first
-// - Pages & static assets: cache-first with offline fallback
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
   // Only same-origin
   if (url.origin !== self.location.origin) return;
 
-  // Only handle GET requests
+  // Only GET
   if (event.request.method !== "GET") return;
 
-  // API calls → network first
-  if (url.pathname.startsWith("/reflections")) {
+  // Data file
+  if (url.pathname === `${BASE_PATH}/reflections.json`) {
     event.respondWith(networkFirst(event.request));
     return;
   }
 
-  // Page navigation → cache first, fallback to home
+  // Page navigation
   if (event.request.mode === "navigate") {
     event.respondWith(
-      cacheFirst(event.request).catch(() => caches.match("/"))
+      cacheFirst(event.request).catch(() => caches.match(`${BASE_PATH}/index.html`))
     );
     return;
   }
 
-  // Static assets
+  // Static files
   event.respondWith(cacheFirst(event.request));
 });
 
 async function cacheFirst(request) {
-  const cached = await caches.match(request);
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
   if (cached) return cached;
 
   const response = await fetch(request);
-  if (response && response.status === 200) {
-    const cache = await caches.open(CACHE_NAME);
+  if (response && response.ok) {
     cache.put(request, response.clone());
   }
   return response;
@@ -85,13 +106,13 @@ async function cacheFirst(request) {
 async function networkFirst(request) {
   const cache = await caches.open(CACHE_NAME);
   try {
-    const fresh = await fetch(request);
-    if (fresh && fresh.status === 200) {
+    const fresh = await fetch(request, { cache: "no-store" });
+    if (fresh && fresh.ok) {
       cache.put(request, fresh.clone());
     }
     return fresh;
-  } catch (err) {
-    const cached = await caches.match(request);
+  } catch {
+    const cached = await cache.match(request);
     return (
       cached ||
       new Response(JSON.stringify([]), {

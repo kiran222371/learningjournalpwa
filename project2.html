@@ -3,29 +3,51 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Project 2 — JavaScript Interaction</title>
- <link rel="stylesheet" href="static/css/style.css">
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css">
 
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" href="./icon-192.png">
 </head>
+
 <body>
+  <!-- Header -->
   <header class="site-header">
     <div class="container">
       <h1 class="logo">Kiran Basnet</h1>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <!-- Theme Toggle -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <!-- Hamburger -->
       <button class="menu-toggle" aria-label="Toggle navigation">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
+
+      <!-- Nav -->
       <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
     </div>
   </header>
 
+  <!-- Main -->
   <main class="container">
     <section class="project-detail">
       <h2>Project 2: JavaScript Interaction</h2>
-      <img src="images/project2.jpg" alt="Project 2 screenshot" style="max-width:100%;border-radius:8px;">
+
+      
+      <img
+        src="./images/project2.jpg"
+        alt="Project 2 screenshot"
+        style="max-width:100%; border-radius:8px;"
+      >
+
       <p>
         This project introduced the use of JavaScript to add interactivity and dynamic functionality to my website.
         I implemented a hamburger menu, theme switcher, and live date/time display.
@@ -33,20 +55,20 @@
         <code>getElementById()</code> and <code>querySelector()</code>, and how event listeners trigger visual changes.
         Debugging and testing in the browser console helped me gain confidence in using developer tools effectively.
       </p>
-      <a href="projects.html" class="back-link">← Back to Projects</a>
+
+      <a href="./projects.html" class="back-link">← Back to Projects</a>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p>© 2025 Kiran Basnet — Learning Journal</p>
     </div>
   </footer>
-<script src="./script.js"></script>
-<script src="./storage.js"></script>
 
-
-
-
+  <!-- Scripts -->
+  <script src="./script.js" defer></script>
+  <script src="./storage.js" defer></script>
 </body>
 </html>

@@ -3,36 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project 1 — HTML & CSS Layout</title>
-  <link rel="stylesheet" href="static/css/style.css">
+  <title>Project 1 — HTML &amp; CSS Layout</title>
 
+  <!-- CSS (GitHub Pages: root file) -->
+  <link rel="stylesheet" href="./style.css">
 
+  
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" href="./icon-192.png">
 </head>
+
 <body>
   <header class="site-header">
     <div class="container">
       <h1 class="logo">Kiran Basnet</h1>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
       <button class="menu-toggle" aria-label="Toggle navigation">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
+
       <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
     </div>
   </header>
 
   <main class="container">
     <section class="project-detail">
-      <h2>Project 1: HTML & CSS Layout</h2>
-      <img src="images/project1.jpg" alt="Project 1 screenshot" style="max-width:100%;border-radius:8px;">
+      <h2>Project 1: HTML &amp; CSS Layout</h2>
+
+
+      <img src="./images/project1.jpg" alt="Project 1 screenshot" style="max-width:100%;border-radius:8px;">
+
       <p>
         In this first project, I designed and developed a responsive webpage using semantic HTML5 and external CSS.
         I focused on building a clean structure and layout that adapts smoothly to different screen sizes using Flexbox and Grid.
         This project helped me understand how mobile-first design simplifies scaling from small to large devices.
         I also learned about accessibility and the importance of using meaningful HTML tags for better SEO and readability.
       </p>
-      <a href="projects.html" class="back-link">← Back to Projects</a>
+
+      <a href="./projects.html" class="back-link">← Back to Projects</a>
     </section>
   </main>
 
@@ -42,11 +55,8 @@
     </div>
   </footer>
 
-<script src="./script.js"></script>
-<script src="./storage.js"></script>
-
-
-
-
+  <!-- Scripts -->
+  <script src="./script.js" defer></script>
+  <script src="./storage.js" defer></script>
 </body>
 </html>

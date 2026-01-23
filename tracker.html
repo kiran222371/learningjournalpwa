@@ -4,33 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Habit Tracker</title>
-  <link rel="stylesheet" href="/static/css/style.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- PWA (optional but consistent) -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" href="./icon-192.png">
 </head>
+
 <body>
- <header class="site-header">
-  <div class="container">
-    <div class="logo">Learning Journal</div>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Kiran Basnet</h1>
 
-    <button class="menu-toggle" aria-label="Menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
 
-    <nav id="nav" class="main-nav"></nav>
+      <button class="menu-toggle" aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
 
-    <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">🌙</button>
-  </div>
-</header>
-
-
-
-
+      <!-- Nav injected by script.js -->
+      <nav id="nav-placeholder" class="main-nav" aria-label="Main navigation"></nav>
+    </div>
   </header>
 
-<main class="container">
-  <h1 style="text-align:center; margin: 1rem 0;">Habit Tracker</h1>
-  <!-- keep the rest of your tracker content below -->
+  <main class="container">
+    <h1 style="text-align:center; margin: 1rem 0;">Habit Tracker</h1>
 
     <section class="card">
       <h2>Today</h2>
@@ -59,20 +62,17 @@
     </section>
 
     <section class="card">
-  <h2>How it connects to the Learning Journal</h2>
-  <p>
-    The habit tracker supports consistent learning behaviours such as coding practice,
-    reading, and reflection, which directly improves the quality and regularity of
-    learning journal entries.
-  </p>
-</section>
-
-
-
+      <h2>How it connects to the Learning Journal</h2>
+      <p>
+        The habit tracker supports consistent learning behaviours such as coding practice,
+        reading, and reflection, which directly improves the quality and regularity of
+        learning journal entries.
+      </p>
+    </section>
   </main>
 
- <script src="./script.js"></script>
-<script src="./tracker.js"></script>
-
+  <!-- Scripts -->
+  <script src="./script.js" defer></script>
+  <script src="./tracker.js" defer></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-// /js/storage.js
+// storage.js (GitHub Pages / static)
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "journalEntries";
+  const STORAGE_KEY = "journalEntries_v1";
 
-  // Elements
+  // Elements (may not exist on every page)
   const form = document.getElementById("journalForm");
   const titleInput = document.getElementById("entryTitle");
   const textInput = document.getElementById("entryText");
@@ -14,7 +14,9 @@
   // Helpers
   const getEntries = () => {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
     } catch {
       return [];
     }
@@ -24,6 +26,11 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
   };
 
+  const makeId = () => {
+    if (globalThis.crypto?.randomUUID) return crypto.randomUUID();
+    return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  };
+
   const escapeHTML = (s) =>
     String(s)
       .replaceAll("&", "&amp;")
@@ -31,6 +38,14 @@
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
+
+  const formatDate = (iso) => {
+    try {
+      return new Date(iso).toLocaleString("en-GB");
+    } catch {
+      return "";
+    }
+  };
 
   const render = () => {
     if (!list) return;
@@ -53,7 +68,7 @@
             <button type="button" class="btn danger" data-action="delete">Delete</button>
           </div>
 
-          <small class="meta">Saved: ${new Date(e.date).toLocaleString("en-GB")}</small>
+          <small class="meta">Saved: ${escapeHTML(formatDate(e.date))}</small>
         </article>
       `
       )
@@ -61,12 +76,18 @@
   };
 
   const addEntry = (title, text) => {
+    const cleanTitle = title.trim();
+    const cleanText = text.trim();
+
+    if (!cleanTitle || !cleanText) return;
+    if (cleanText.length < 5) return;
+
     const entries = getEntries();
 
     const newEntry = {
-      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-      title: title.trim(),
-      text: text.trim(),
+      id: makeId(),
+      title: cleanTitle,
+      text: cleanText,
       date: new Date().toISOString(),
     };
 
@@ -92,8 +113,6 @@
       const title = titleInput?.value || "";
       const text = textInput?.value || "";
 
-      if (!title.trim() || !text.trim()) return;
-
       addEntry(title, text);
 
       form.reset();
@@ -111,7 +130,7 @@
     });
   }
 
-  // Only DELETE happens here (copy is Browser API)
+  // Only DELETE happens here (copy is handled in browser.js)
   if (list) {
     list.addEventListener("click", (e) => {
       const btn = e.target.closest("button");

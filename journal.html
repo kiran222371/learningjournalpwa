@@ -1,16 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
- <link rel="manifest" href="./manifest.json">
-
-  <meta name="theme-color" content="#0f172a">
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Learning Journal — Weekly Reflections</title>
- <link rel="stylesheet" href="./style.css">
 
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" href="./icon-192.png">
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -384,7 +386,7 @@
       </article>
     </section>
 
-    <!-- ✅ Lab 5: Reflections from backend/reflections.json -->
+    <!-- ✅ Lab 5: Reflections from reflections.json -->
     <section class="journal-entry" id="reflections-section">
       <h2>Reflections (<span id="reflectionCount">0</span>)</h2>
       <div id="reflectionsList">Loading reflections...</div>
@@ -439,69 +441,51 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  
-
-<script src="./reflections.js"></script>
-
-
-<script src="./script.js"></script>
-<script src="./storage.js"></script>
-<script src="./browser.js"></script>
-<script src="./thirdparty.js"></script>
-
-
-  
-  
-  
+  <!-- Scripts (GitHub Pages: root files) -->
+  <script src="./reflections.js" defer></script>
+  <script src="./script.js" defer></script>
+  <script src="./storage.js" defer></script>
+  <script src="./browser.js" defer></script>
+  <script src="./thirdparty.js" defer></script>
 
   <!-- Week tabs logic -->
- <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".week-btn");
-    const weeks = document.querySelectorAll(".week-content");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const buttons = document.querySelectorAll(".week-btn");
+      const weeks = document.querySelectorAll(".week-content");
 
-    function showWeek(weekNum) {
-      weeks.forEach((sec) => {
-        sec.style.display = sec.dataset.week === weekNum ? "block" : "none";
-      });
+      function showWeek(weekNum) {
+        weeks.forEach((sec) => {
+          sec.style.display = sec.dataset.week === weekNum ? "block" : "none";
+        });
+
+        buttons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.week === weekNum);
+        });
+
+        localStorage.setItem("selectedWeek", weekNum);
+      }
 
       buttons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.week === weekNum);
+        btn.addEventListener("click", () => {
+          showWeek(btn.dataset.week);
+
+          const url = new URL(window.location.href);
+          url.searchParams.set("week", btn.dataset.week);
+          window.history.replaceState({}, "", url);
+        });
       });
 
-      // remember selection
-      localStorage.setItem("selectedWeek", weekNum);
-    }
+      const url = new URL(window.location.href);
+      const weekFromUrl = url.searchParams.get("week");
+      const saved = localStorage.getItem("selectedWeek");
+      const initial = weekFromUrl || saved || "1";
 
-    // Click handlers
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        showWeek(btn.dataset.week);
-
-        // Update URL without reloading
-        const url = new URL(window.location.href);
-        url.searchParams.set("week", btn.dataset.week);
-        window.history.replaceState({}, "", url);
-      });
+      showWeek(initial);
     });
+  </script>
 
-    // 1) URL param has priority: /journal?week=3
-    const url = new URL(window.location.href);
-    const weekFromUrl = url.searchParams.get("week");
-
-    // 2) otherwise localStorage
-    const saved = localStorage.getItem("selectedWeek");
-
-    // 3) fallback Week 1
-    const initial = weekFromUrl || saved || "1";
-
-    showWeek(initial);
-  });
-</script>
-
-
-  <!-- Week button styling (small + safe) -->
+  <!-- Week button styling -->
   <style>
     .week-buttons {
       display: flex;

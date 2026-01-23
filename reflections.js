@@ -1,31 +1,92 @@
-// --------------------
-// Load reflections from Flask
-// --------------------
-async function loadReflections() {
-  const container = document.getElementById("reflectionsList");
-  const count = document.getElementById("reflectionCount");
 
-  if (!container) return;
 
-  try {
-    const res = await fetch("/reflections", { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+(() => {
+  "use strict";
 
-    const entries = await res.json();
+  const STORAGE_KEY = "learningJournalReflections_v1";
 
-    if (count) count.textContent = Array.isArray(entries) ? entries.length : 0;
+  function $(id) {
+    return document.getElementById(id);
+  }
 
-    if (!Array.isArray(entries) || entries.length === 0) {
+  function safeText(v) {
+    return typeof v === "string" ? v : "";
+  }
+
+  function formatDate(d = new Date()) {
+    // ISO date: YYYY-MM-DD
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  function readLocalReflections() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      return Array.isArray(data) ? data : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeLocalReflections(entries) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  }
+
+  function normalizeEntry(entry) {
+    // Support old fields: {text} vs {reflection}
+    return {
+      id: entry.id || `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      name: safeText(entry.name),
+      reflection: safeText(entry.reflection || entry.text),
+      date: safeText(entry.date) || formatDate(),
+    };
+  }
+
+  async function loadInitialFromJsonIfNeeded() {
+    // If user already has local reflections, keep them.
+    const local = readLocalReflections();
+    if (local && local.length) return local;
+
+    // Otherwise try to load reflections.json from repo root
+    try {
+      const res = await fetch("./reflections.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const entries = await res.json();
+
+      const normalized = Array.isArray(entries) ? entries.map(normalizeEntry) : [];
+      writeLocalReflections(normalized);
+      return normalized;
+    } catch (err) {
+      console.warn("Could not load reflections.json:", err);
+      writeLocalReflections([]);
+      return [];
+    }
+  }
+
+  function renderReflections(entries) {
+    const container = $("reflectionsList");
+    const count = $("reflectionCount");
+    if (!container) return;
+
+    const list = Array.isArray(entries) ? entries : [];
+    if (count) count.textContent = String(list.length);
+
+    if (list.length === 0) {
       container.textContent = "No reflections yet.";
       return;
     }
 
     container.innerHTML = "";
 
-    // show newest first
-    entries.slice().reverse().forEach((entry) => {
+    // Newest first
+    list.slice().reverse().forEach((entry) => {
       const item = document.createElement("div");
       item.className = "reflection-item";
+      item.dataset.id = entry.id;
 
       const date = document.createElement("div");
       date.className = "reflection-date";
@@ -37,104 +98,120 @@ async function loadReflections() {
 
       const text = document.createElement("div");
       text.className = "reflection-text";
-      text.textContent = entry.reflection || entry.text || "";
+      text.textContent = entry.reflection || "";
+
+      // Optional delete button (local only)
+      const actions = document.createElement("div");
+      actions.className = "reflection-actions";
+      const del = document.createElement("button");
+      del.type = "button";
+      del.className = "btn danger";
+      del.textContent = "Delete";
+      del.dataset.action = "delete";
+      del.dataset.id = entry.id;
+      actions.appendChild(del);
 
       item.appendChild(date);
       if (entry.name) item.appendChild(name);
       item.appendChild(text);
+      item.appendChild(actions);
 
       container.appendChild(item);
     });
-  } catch (err) {
-    console.error(err);
-    container.textContent = "Could not load reflections.";
-  }
-}
-
-// --------------------
-// Submit reflection to Flask
-// (Matches your page labels: Title + Reflection)
-// --------------------
-async function submitReflection(event) {
-  if (event) event.preventDefault();
-
-  // Your page shows "Title" and "Reflection"
-  // So we look for common IDs used in journals:
-  const nameEl =
-    document.getElementById("title") ||
-    document.getElementById("fname") ||
-    document.getElementById("name") ||
-    document.getElementById("entryTitle");
-
-  const reflectionEl =
-    document.getElementById("reflectionText") ||
-    document.getElementById("reflection") ||
-    document.getElementById("entryText") ||
-    document.getElementById("journalEntry");
-
-  if (!nameEl || !reflectionEl) {
-    alert(
-      "Could not find your input fields. Make sure your Title input has id='title' and Reflection textarea has id='reflectionText'."
-    );
-    return false;
   }
 
-  const name = nameEl.value.trim();
-  const reflection = reflectionEl.value.trim();
-
-  if (!name) {
-    alert("Please enter a title (or name).");
-    return false;
+  async function loadReflections() {
+    const entries = await loadInitialFromJsonIfNeeded();
+    renderReflections(entries);
   }
 
-  if (reflection.length < 10) {
-    alert("Reflection must be at least 10 characters.");
-    return false;
+  function findInputs() {
+    
+    const nameEl =
+      $("title") ||
+      $("fname") ||
+      $("name") ||
+      $("entryTitle");
+
+    const reflectionEl =
+      $("reflectionText") ||
+      $("reflection") ||
+      $("entryText") ||
+      $("journalEntry");
+
+    return { nameEl, reflectionEl };
   }
 
-  // Backend expects: { name, reflection }
-  const entry = { name, reflection };
+  function submitReflection(event) {
+    if (event) event.preventDefault();
 
-  try {
-    const res = await fetch("/add_reflection", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(entry),
-    });
+    const { nameEl, reflectionEl } = findInputs();
 
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      alert(err.error || "Failed to submit reflection.");
+    if (!nameEl || !reflectionEl) {
+      alert("Could not find input fields. Make sure Title uses id='entryTitle' and Reflection uses id='entryText'.");
       return false;
     }
 
-    // clear form and reload list
+    const name = nameEl.value.trim();
+    const reflection = reflectionEl.value.trim();
+
+    if (!name) {
+      alert("Please enter a title (or name).");
+      return false;
+    }
+
+    if (reflection.length < 10) {
+      alert("Reflection must be at least 10 characters.");
+      return false;
+    }
+
+    const current = readLocalReflections() || [];
+    const newEntry = normalizeEntry({ name, reflection, date: formatDate() });
+
+    current.push(newEntry);
+    writeLocalReflections(current);
+
+    // clear + re-render
     nameEl.value = "";
     reflectionEl.value = "";
+
+    renderReflections(current);
+    return false;
+  }
+
+  function deleteReflectionById(id) {
+    const current = readLocalReflections() || [];
+    const next = current.filter((x) => x.id !== id);
+    writeLocalReflections(next);
+    renderReflections(next);
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
     await loadReflections();
-  } catch (err) {
-    console.error(err);
-    alert("Network error submitting reflection.");
-  }
 
-  return false;
-}
+    // Hook form submit if available
+    const form = document.getElementById("journalForm");
+    if (form) form.addEventListener("submit", submitReflection);
 
-// --------------------
-// Hook the correct button (NOT the first form on the page)
-// --------------------
-document.addEventListener("DOMContentLoaded", () => {
-  loadReflections();
+    // Also hook "Save Entry" button if it exists
+    const saveBtn = document.getElementById("saveEntryBtn");
+    if (saveBtn) saveBtn.addEventListener("click", submitReflection);
 
-  // Your page has a "Save Entry" button.
-  // We hook by button text if no specific ID exists.
-  const buttons = Array.from(document.querySelectorAll("button, input[type='submit']"));
+    // Delete handler (event delegation)
+    const container = $("reflectionsList");
+    if (container) {
+      container.addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (!btn) return;
+        if (btn.dataset.action !== "delete") return;
 
-  const saveBtn =
-    document.getElementById("saveEntryBtn") ||
-    buttons.find((b) => (b.textContent || b.value || "").trim().toLowerCase() === "save entry");
+        const id = btn.dataset.id;
+        if (!id) return;
 
-  if (saveBtn) {
-    saveBtn.addEventListener("click", submitReflection);
-  }
-});
+        if (confirm("Delete this reflection? (This only removes it from your browser)")) {
+          deleteReflectionById(id);
+        }
+      });
+    }
+  });
+})();
