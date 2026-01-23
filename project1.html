@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project 3 — Progressive Web App</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Project 1 — HTML & CSS Layout</title>
+  <link rel="stylesheet" href="static/css/style.css">
+
 
 </head>
 <body>
@@ -23,13 +24,13 @@
 
   <main class="container">
     <section class="project-detail">
-      <h2>Project 3: Progressive Web App (PWA)</h2>
-      <img src="images/project3.jpg" alt="Project 3 screenshot" style="max-width:100%;border-radius:8px;">
+      <h2>Project 1: HTML & CSS Layout</h2>
+      <img src="images/project1.jpg" alt="Project 1 screenshot" style="max-width:100%;border-radius:8px;">
       <p>
-        In this project, I will extend my Learning Journal into a Progressive Web App (PWA).
-        The aim is to make the site installable, accessible offline, and capable of caching key files for performance.
-        This project will help me understand how service workers, manifests, and caching strategies work to create an app-like experience.
-        It’s a step toward combining design, interactivity, and real-world deployment for mobile-friendly web development.
+        In this first project, I designed and developed a responsive webpage using semantic HTML5 and external CSS.
+        I focused on building a clean structure and layout that adapts smoothly to different screen sizes using Flexbox and Grid.
+        This project helped me understand how mobile-first design simplifies scaling from small to large devices.
+        I also learned about accessibility and the importance of using meaningful HTML tags for better SEO and readability.
       </p>
       <a href="projects.html" class="back-link">← Back to Projects</a>
     </section>
@@ -41,8 +42,11 @@
     </div>
   </footer>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-<script src="{{ url_for('static', filename='js/storage.js') }}"></script>
+<script src="static/js/script.js"></script>
+
+<script src="static/js/storage.js"></script>
+
+
 
 </body>
 </html>
